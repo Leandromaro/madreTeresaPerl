@@ -5,8 +5,8 @@ use strict;
 my $driver = "mysql"; 
 my $database = "madreTeresa";
 my $dsn = "DBI:$driver:database=$database";
-my $userid = "root";
-my $password = "racing31720700";
+my $userid = "⁠⁠⁠calcuta";
+my $password = "⁠⁠⁠calcuta";
 
 my $dbh = DBI->connect($dsn, $userid, $password,{
    PrintError       => 0,
@@ -19,7 +19,6 @@ $dbh->do("DROP DATABASE $database");
 $dbh->do("CREATE DATABASE  IF NOT EXISTS `madreTeresa` /*!40100 DEFAULT CHARACTER SET latin1 */;");
 $dbh->do("USE `madreTeresa`;");
 
-$dbh->do("DROP TABLE IF EXISTS `donaciones`;");
 $dbh->do("CREATE TABLE `donaciones` (
   `iddonaciones` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
@@ -30,10 +29,6 @@ $dbh->do("CREATE TABLE `donaciones` (
   PRIMARY KEY (`iddonaciones`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;");
 
-$dbh->do("DROP TABLE IF EXISTS `eventos`;");
-
-$dbh->do("DROP TABLE IF EXISTS `logUsuario`;");
-
 $dbh->do("CREATE TABLE `logUsuario` (
   `idlogUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `activo` int(11) DEFAULT NULL,
@@ -42,7 +37,6 @@ $dbh->do("CREATE TABLE `logUsuario` (
   PRIMARY KEY (`idlogUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1;");
 
-$dbh->do("DROP TABLE IF EXISTS `provincias`;");
 $dbh->do("CREATE TABLE `provincias` (
   `codProv` int(11) NOT NULL,
   `provincia` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -51,9 +45,6 @@ $dbh->do("CREATE TABLE `provincias` (
 
 $dbh->do("INSERT INTO `provincias` VALUES (2,'BUENOS AIRES'),(3,'CATAMARCA'),(4,'CÓRDOBA'),(5,'CORRIENTES'),(6,'CHACO'),(7,'CHUBUT'),(8,'ENTRE RÍOS'),(9,'FORMOSA'),(10,'JUJUY'),(11,'LA PAMPA'),(12,'LA RIOJA'),(13,'MENDOZA'),(14,'MISIONES'),(15,'NEUQUEN'),(16,'RÍO NEGRO'),(17,'SALTA'),(18,'SAN JUAN'),(19,'SAN LUIS'),(20,'SANTA CRUZ'),(21,'SANTA FE'),(22,'SANTIAGO DEL ESTERO'),(23,'TUCUMÁN'),(24,'TIERRA DEL FUEGO');");
 
-
-
-$dbh->do("DROP TABLE IF EXISTS `tipoGasto`;");
 $dbh->do("CREATE TABLE `tipoGasto` (
   `idtipo_gasto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
@@ -62,7 +53,6 @@ $dbh->do("CREATE TABLE `tipoGasto` (
   PRIMARY KEY (`idtipo_gasto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;");
 
-$dbh->do("DROP TABLE IF EXISTS `tipoSocio`;");
 $dbh->do("CREATE TABLE `tipoSocio` (
   `idTipoSocio` int(11) NOT NULL AUTO_INCREMENT,
   `tipoSocio` varchar(100) NOT NULL,
@@ -72,7 +62,6 @@ $dbh->do("CREATE TABLE `tipoSocio` (
 
 $dbh->do("INSERT INTO `tipoSocio` VALUES (1,'ACTIVO',20.00),(3,'ADHERENTE',15.00),(4,'HONORARIO',5.00),(5,'VITALICIO',20.00);");
 
-$dbh->do("DROP TABLE IF EXISTS `usuario`;");
 $dbh->do("CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
@@ -81,8 +70,6 @@ $dbh->do("CREATE TABLE `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;");
 
 $dbh->do("INSERT INTO `usuario` VALUES (15,'admin','admin'),(16,'calcuta','calcuta');");
-
-$dbh->do("DROP TABLE IF EXISTS `cuotaSocial`;");
 
 $dbh->do("CREATE TABLE `gastos` (
   `idgastos` int(11) NOT NULL AUTO_INCREMENT,
@@ -94,8 +81,6 @@ $dbh->do("CREATE TABLE `gastos` (
   KEY `fk_gastos_tipo_gasto1_idx` (`tipo_gasto_idtipo_gasto`),
   CONSTRAINT `gastos_ibfk_2` FOREIGN KEY (`tipo_gasto_idtipo_gasto`) REFERENCES `tipoGasto` (`idtipo_gasto`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;");
-
-$dbh->do("DROP TABLE IF EXISTS `localidades`;");
 
 $dbh->do("CREATE TABLE `localidades` (
   `codLoc` int(11) NOT NULL,
@@ -122,8 +107,6 @@ $dbh->do("CREATE TABLE `florVida` (
   CONSTRAINT `fk_florVida_1` FOREIGN KEY (`localidad`) REFERENCES `localidades` (`codLoc`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;");
 
-
-$dbh->do("DROP TABLE IF EXISTS `socios`;");
 $dbh->do("CREATE TABLE `socios` (
   `idSocio` int(11) NOT NULL AUTO_INCREMENT,
   `idTipoSocio` int(11) NOT NULL,
@@ -150,7 +133,6 @@ $dbh->do("CREATE TABLE `socios` (
   CONSTRAINT `fk_socios_2` FOREIGN KEY (`idTipoSocio`) REFERENCES `tipoSocio` (`idTipoSocio`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;");
 
-$dbh->do("DROP TABLE IF EXISTS `sociosFlorVida`;");
 $dbh->do("CREATE TABLE `sociosFlorVida` (
   `idSocio` int(11) NOT NULL AUTO_INCREMENT,
   `apellido` varchar(150) DEFAULT NULL,
@@ -167,7 +149,6 @@ $dbh->do("CREATE TABLE `sociosFlorVida` (
   KEY `fk_sociosFlorVida_1` (`localidad`),
   CONSTRAINT `fk_sociosFlorVida_1` FOREIGN KEY (`localidad`) REFERENCES `localidades` (`codLoc`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;");
-$dbh->do("DROP TABLE IF EXISTS `tipoEvento`;");
 
 $dbh->do("CREATE TABLE `relacSocDifuntos` (
   `idSocioFV` int(11) NOT NULL,
